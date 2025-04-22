@@ -41,10 +41,9 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
 # Instalar dependências do Playwright
+RUN pip install playwright
 RUN playwright install-deps
 
-# Instalar Playwright
-RUN pip install playwright
+# Instala o navegador (ex: Firefox)
+RUN playwright install firefox
 
-# Instalar dependências do Playwright e navegador
-RUN playwright install-deps && playwright install firefox
