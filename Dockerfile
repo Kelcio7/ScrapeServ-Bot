@@ -39,3 +39,12 @@ EXPOSE 5006
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+
+# Instalar dependências do Playwright
+RUN playwright install-deps
+
+# Instalar Playwright
+RUN pip install playwright
+
+# Instalar dependências do Playwright e navegador
+RUN playwright install-deps && playwright install firefox
