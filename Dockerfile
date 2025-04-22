@@ -40,10 +40,14 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
-# Instalar dependências do Playwright
+# Instalar Playwright
 RUN pip install playwright
-RUN playwright install-deps
 
-# Instala o navegador (ex: Firefox)
-RUN playwright install firefox
+# Criar apelido "dramaturgo" para o Playwright
+RUN ln -s $(which playwright) /usr/local/bin/dramaturgo
 
+# Instalar dependências do Playwright usando o apelido
+RUN dramaturgo install-deps
+
+# Instalar navegador (ex: Firefox) também com o apelido
+RUN dramaturgo install firefox
